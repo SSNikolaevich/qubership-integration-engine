@@ -150,7 +150,7 @@ security:
   role-prefix: 'ROLE_'
 
 consul:
-  url: http://${CONSUL_URL:consul:8500}
+  url: ${CONSUL_URL:http://consul:8500}
   token: ${CONSUL_ADMIN_TOKEN}
   keys:
     prefix: /config/${NAMESPACE}
