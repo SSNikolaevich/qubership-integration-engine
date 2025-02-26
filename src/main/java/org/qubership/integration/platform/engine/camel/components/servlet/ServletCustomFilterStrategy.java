@@ -16,15 +16,34 @@
 
 package org.qubership.integration.platform.engine.camel.components.servlet;
 
-import java.util.Locale;
 import java.util.Optional;
+
+import org.apache.camel.Exchange;
 import org.apache.camel.http.common.HttpHeaderFilterStrategy;
 import org.qubership.integration.platform.engine.camel.components.context.propagation.ContextPropsProvider;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+import static java.util.Objects.nonNull;
+
+@Component
 public class ServletCustomFilterStrategy extends HttpHeaderFilterStrategy {
+    private final Optional<ContextPropsProvider> contextPropsProvider;
 
-    public ServletCustomFilterStrategy(Optional<ContextPropsProvider> propsProvider) {
-        propsProvider.ifPresent(bean -> bean.getHeaderToContextMapping().keySet()
-            .forEach(header -> getOutFilter().add(header.toLowerCase(Locale.ENGLISH))));
+    @Autowired
+    public ServletCustomFilterStrategy(Optional<ContextPropsProvider> contextPropsProvider) {
+        this.contextPropsProvider = contextPropsProvider;
+    }
+
+    @Override
+    protected boolean extendedFilter(Direction direction, String headerName, Object headerValue, Exchange exchange) {
+        return (Direction.OUT.equals(direction) && isHeaderInContext(headerName)) == isFilterOnMatch();
+    }
+
+    private boolean isHeaderInContext(String name) {
+        return this.contextPropsProvider
+            .map(ContextPropsProvider::getDownstreamHeaders)
+            .map(headers -> nonNull(headers) && headers.contains(name))
+            .orElse(false);
     }
 }
