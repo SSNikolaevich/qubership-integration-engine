@@ -10,16 +10,16 @@ server:
 spring:
   autoconfigure:
     exclude:
-    - org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration
-    - org.springframework.boot.autoconfigure.data.mongo.MongoDataAutoConfiguration
-    - org.springframework.boot.autoconfigure.flyway.FlywayAutoConfiguration
-    - org.springframework.boot.autoconfigure.data.elasticsearch.ElasticsearchDataAutoConfiguration
-    - org.springframework.boot.autoconfigure.kafka.KafkaAutoConfiguration
-    - org.springframework.boot.autoconfigure.jooq.JooqAutoConfiguration
-    - org.springframework.boot.actuate.autoconfigure.jdbc.DataSourceHealthContributorAutoConfiguration
-    - org.springframework.boot.actuate.autoconfigure.metrics.jdbc.DataSourcePoolMetricsAutoConfiguration
-    - org.springframework.boot.autoconfigure.amqp.RabbitAutoConfiguration
-    - org.apache.camel.component.quartz.springboot.QuartzComponentAutoConfiguration
+      - org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration
+      - org.springframework.boot.autoconfigure.data.mongo.MongoDataAutoConfiguration
+      - org.springframework.boot.autoconfigure.flyway.FlywayAutoConfiguration
+      - org.springframework.boot.autoconfigure.data.elasticsearch.ElasticsearchDataAutoConfiguration
+      - org.springframework.boot.autoconfigure.kafka.KafkaAutoConfiguration
+      - org.springframework.boot.autoconfigure.jooq.JooqAutoConfiguration
+      - org.springframework.boot.actuate.autoconfigure.jdbc.DataSourceHealthContributorAutoConfiguration
+      - org.springframework.boot.actuate.autoconfigure.metrics.jdbc.DataSourcePoolMetricsAutoConfiguration
+      - org.springframework.boot.autoconfigure.amqp.RabbitAutoConfiguration
+      - org.apache.camel.component.quartz.springboot.QuartzComponentAutoConfiguration
   main:
     allow-bean-definition-overriding: true
   profiles:
@@ -104,8 +104,8 @@ db:
       default-schema: ${spring.jpa.properties.hibernate.default_schema}
       create-schemas: true
       outOfOrder: true
-      ignoreMigrationPatterns: ''
-      locations: 'classpath:db/migration/postgresql/static'
+      ignoreMigrationPatterns: ""
+      locations: "classpath:db/migration/postgresql/static"
       validateOnMigrate: true
     qrtz-datasource:
       baseline-on-migrate: true
@@ -113,8 +113,8 @@ db:
       default-schema: ${spring.jpa.properties.hibernate.default_schema}
       create-schemas: true
       outOfOrder: true
-      ignoreMigrationPatterns: ''
-      locations: 'classpath:db/migration/postgresql/configs'
+      ignoreMigrationPatterns: ""
+      locations: "classpath:db/migration/postgresql/configs"
   hikari:
     datasources:
       datasource:
@@ -147,7 +147,7 @@ db:
         leak-detection-threshold: ${db.hikari.datasources.datasource.leak-detection-threshold}
 
 security:
-  role-prefix: 'ROLE_'
+  role-prefix: "ROLE_"
 
 consul:
   url: ${CONSUL_URL:http://consul:8500}
@@ -173,13 +173,13 @@ camel:
     metrics:
       metric-registry: io.micrometer.prometheus.PrometheusMeterRegistry
     servlet:
-      http-registry: '#gatewayHttpRegistry'
+      http-registry: "#gatewayHttpRegistry"
   servlet:
     mapping:
       enabled: false
   constants:
     request-filter-header:
-      name: 'requestFilterHeaderAllowlist'
+      name: "requestFilterHeaderAllowlist"
 
 qip:
   camel:
@@ -251,7 +251,7 @@ qip:
   local-truststore:
     store:
       path: /tmp/truststore/defaulttruststore.jks
-      password: ''
+      password: ""
     certs:
       location: :/tmp/cert/${SSL_SECRET:defaultsslcertificate}
   production-mode:
