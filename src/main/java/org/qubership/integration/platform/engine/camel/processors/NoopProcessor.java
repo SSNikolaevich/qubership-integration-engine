@@ -14,21 +14,16 @@
  * limitations under the License.
  */
 
-package org.qubership.integration.platform.engine.camel.context.propagation;
+package org.qubership.integration.platform.engine.camel.processors;
 
-import java.util.Map;
+import org.apache.camel.Exchange;
+import org.apache.camel.Processor;
+import org.springframework.stereotype.Component;
 
-public interface CamelExchangeContextPropagation {
+@Component
+public class NoopProcessor implements Processor {
+    @Override
+    public void process(Exchange exchange) throws Exception {
 
-    void initRequestContext(Map<String, Object> headers);
-
-    Map<String, Object> createContextSnapshot();
-
-    Map<String, String> buildContextSnapshotForSessions();
-
-    void activateContextSnapshot(Map<String, Object> snapshot);
-
-    void removeContextHeaders(Map<String, Object> exchangeHeaders);
-
-    void clear();
+    }
 }

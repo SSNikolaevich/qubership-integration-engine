@@ -14,21 +14,18 @@
  * limitations under the License.
  */
 
-package org.qubership.integration.platform.engine.camel.context.propagation;
+package org.qubership.integration.platform.engine.camel.idempotency;
 
-import java.util.Map;
+import lombok.Builder;
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-public interface CamelExchangeContextPropagation {
-
-    void initRequestContext(Map<String, Object> headers);
-
-    Map<String, Object> createContextSnapshot();
-
-    Map<String, String> buildContextSnapshotForSessions();
-
-    void activateContextSnapshot(Map<String, Object> snapshot);
-
-    void removeContextHeaders(Map<String, Object> exchangeHeaders);
-
-    void clear();
+@Data
+@Builder(toBuilder = true)
+@Getter
+@Setter
+public class IdempotentRepositoryParameters {
+    private int ttl;
+    private IdempotentRepositoryKeyStrategy keyStrategy;
 }
