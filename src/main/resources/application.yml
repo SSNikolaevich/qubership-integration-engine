@@ -111,7 +111,7 @@ db:
       default-schema: ${spring.jpa.properties.hibernate.default_schema}
       create-schemas: true
       outOfOrder: true
-      ignoreMigrationPatterns: ''
+      ignoreMigrationPatterns: '*:future,*:missing'
       locations: 'classpath:db/migration/postgresql/static'
       validateOnMigrate: true
     qrtz-datasource:
@@ -120,7 +120,7 @@ db:
       default-schema: ${spring.jpa.properties.hibernate.default_schema}
       create-schemas: true
       outOfOrder: true
-      ignoreMigrationPatterns: ''
+      ignoreMigrationPatterns: '*:future,*:missing'
       locations: 'classpath:db/migration/postgresql/configs'
   hikari:
     datasources:
